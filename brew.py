@@ -1,6 +1,6 @@
 
 #!/usr/bin/python
-# -*- coding: <encoding-name> -*-
+# -*- coding: utf-8 -*-
 
 import time
 import RPi.GPIO as GPIO
