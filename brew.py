@@ -18,7 +18,7 @@ heater_pin = 11
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(heatr_pin, GPIO.OUT)
 
-# input prompt für die zeit und temperatur in ein dict
+# input prompt fuer die zeit und temperatur in ein dict
 
 for i in range(mash_rest_nr)
     mash_rest_time[i] = int(input("Wieviele Minuten für Rast Nr."+i+". Antworte!"))
