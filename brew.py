@@ -1,6 +1,6 @@
 
-!/usr/bin/python
--*- coding: utf-8 -*-
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
 
 import time
 import RPi.GPIO as GPIO
@@ -21,7 +21,7 @@ GPIO.setup(heatr_pin, GPIO.OUT)
 # input prompt fuer die zeit und temperatur in ein dict
 
 for i in range(mash_rest_nr):
-    mash_rest_time[i] = int(input("Wieviele Minuten für Rast Nr."+i+"?))
+    mash_rest_time[i] = int(input("Wieviele Minuten für Rast Nr."+i+"?"))
     mash_rest_temp[i] = float(input("Rast Nr."+i " auf welcher Temperatur?")) * 60
 
 # heizungssteuerung
