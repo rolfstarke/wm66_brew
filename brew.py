@@ -21,8 +21,8 @@ GPIO.setup(heatr_pin, GPIO.OUT)
 # input prompt fuer die zeit und temperatur in ein dict
 
 for i in range(mash_rest_nr):
-    mash_rest_time[i] = int(input("Wieviele Minuten für Rast Nr."+i+". Antworte!"))
-    mash_rest_temp[i] = float(input("Ey Stümper! Rast Nr."+i " auf welcher Temperatur?")) * 60
+    mash_rest_time[i] = int(input("Wieviele Minuten für Rast Nr."+i+"?))
+    mash_rest_temp[i] = float(input("Rast Nr."+i " auf welcher Temperatur?")) * 60
 
 # heizungssteuerung
 
