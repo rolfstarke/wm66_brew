@@ -1,7 +1,10 @@
 
+#!/usr/bin/python
+# -*- coding: <encoding-name> -*-
+
 import time
 import RPi.GPIO as GPIO
-import w1thermsensor
+from w1thermsensor import W1ThermSensor
 
 mash_rest_nr = input("Ey Fucker, wieviele Rasten?")
 mash_rest_times = {}
@@ -9,7 +12,7 @@ mash_rest_temp = {}
 current_temp = W1ThermSensor.get_temperature()
 relay_interval = 10
 current_mash_timer = 0
-agitator_pin =              
+#agitator_pin =              
 heater_pin = 11             
 
 GPIO.setmode(GPIO.BOARD)
