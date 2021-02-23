@@ -26,7 +26,7 @@ for i in range(mash_rest_nr):
 
 # heizungssteuerung
 
-def heater_control(target_temp)
+def heater_control(target_temp):
 	if current_temp < target_temp :
 		GPIO.output(heater_pin, GPIO.LOW)
 	else:
@@ -34,14 +34,14 @@ def heater_control(target_temp)
 
 # durchgehen der Rasten
 
-for i in range(mash_rest_nr)
+for i in range(mash_rest_nr):
 	while current_temp < mash_rest_temp[i]:
 		heater_control(mash_rest_temp[i])
-		sleep(relay_inerval)
+		sleep(relay_interval)
 	print("heatup to mash rest" + i +" completed") 
 	while current_mash_timer < mash_rest_time[i]:
 		heater_control(mash_rest_temp[i])
-		sleep(relay_inerval)
+		sleep(relay_interval)
 		current_mash_timer += relay_interval
 	print("mash rest" + i +" completed")
 	current_mash_timer = 0
