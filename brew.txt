@@ -45,4 +45,3 @@ for i in range(mash_rest_nr)
 
 GPIO.output(heater_pin, GPIO.HIGH)
 print ("last mash completed")
-
