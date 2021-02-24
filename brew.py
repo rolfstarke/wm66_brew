@@ -17,6 +17,7 @@ heater_pin = 11
 current_temp = W1ThermSensor().get_temperature()
 
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 GPIO.setup(heater_pin, GPIO.OUT)
 GPIO.setup(agitator_pin, GPIO.OUT)
 GPIO.output(heater_pin, GPIO.HIGH)
