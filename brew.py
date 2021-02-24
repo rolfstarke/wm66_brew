@@ -9,7 +9,7 @@ from w1thermsensor import W1ThermSensor
 mash_rest_nr = input("Ey Fucker, wieviele Rasten?")
 mash_rest_times = {}
 mash_rest_temp = {}
-current_temp = W1ThermSensor().get_temperature()
+current_temp = 0
 relay_interval = 1
 current_mash_timer = 0
 #agitator_pin =              
@@ -28,6 +28,7 @@ for i in range(mash_rest_nr):
 # heizungssteuerung
 
 def heater_control(target_temp):
+	current_temp = W1ThermSensor().get_temperature()
 	if current_temp < target_temp :
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
