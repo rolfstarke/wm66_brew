@@ -10,7 +10,7 @@ mash_rest_nr = input("Ey Fucker, wieviele Rasten?")
 mash_rest_times = {}
 mash_rest_temp = {}
 current_temp = W1ThermSensor().get_temperature()
-relay_interval = 10
+relay_interval = 1
 current_mash_timer = 0
 #agitator_pin =              
 heater_pin = 11             
@@ -37,12 +37,14 @@ def heater_control(target_temp):
 for i in range(mash_rest_nr):
 	while current_temp < mash_rest_temp[i]:
 		heater_control(mash_rest_temp[i])
-		sleep(relay_interval)
+		time.sleep(relay_interval)
+		print(current_temp)
 	print("heatup to mash rest" + i +" completed") 
 	while current_mash_timer < mash_rest_time[i]:
 		heater_control(mash_rest_temp[i])
-		sleep(relay_interval)
+		time.sleep(relay_interval)
 		current_mash_timer += relay_interval
+		print(current_temp)
 	print("mash rest" + i +" completed")
 	current_mash_timer = 0
 
