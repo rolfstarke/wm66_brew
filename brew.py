@@ -44,11 +44,11 @@ def heater_control(target_temp):
 for i in range(mash_rest_nr):
 	while current_temp < mash_rest_temp[i]:
 		heater_control(mash_rest_temp[i])
-	print("heatup to mash rest" + i +" completed") 
+	print("heatup to mash rest" + str(i+1) +" completed") 
 	while current_mash_timer < mash_rest_time[i]:
 		heater_control(mash_rest_temp[i])
 		current_mash_timer += relay_interval
-	print("mash rest" + i +" completed")
+	print("mash rest" + str(i+1) +" completed")
 	current_mash_timer = 0
 
 GPIO.output(heater_pin, GPIO.HIGH)
