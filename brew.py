@@ -17,7 +17,7 @@ heater_pin = 11
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(heater_pin, GPIO.OUT)
-GPIO.output(heater_pin, LOW)
+GPIO.output(heater_pin, GPIO.LOW)
 
 # input prompt fuer die zeit und temperatur in ein dict
 
