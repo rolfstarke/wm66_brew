@@ -28,7 +28,7 @@ for i in range(mash_rest_nr):
     mash_rest_times[i] = int(input("Wieviele Minuten fuer Rast Nr. "+str(i+1)+"? ")) * 60
     mash_rest_temp[i] = float(input("Rast Nr. "+str(i+1)+ " auf welcher Temperatur? ")) 
 
-def current_temp:
+def current_temp():
 
 	temperature = W1ThermSensor().get_temperature()
 	return temperature
