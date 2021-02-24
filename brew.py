@@ -37,14 +37,14 @@ def current_temp():
 
 def heater_control(target_temp):
 	
-	if current_temp < target_temp :
+	if current_temp() < target_temp :
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
-		print(str(current_temp) + "A")
+		print(str(current_temp()) + "A")
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
-		print(str(current_temp) + "B")
+		print(str(current_temp()) + "B")
 
 # durchgehen der Rasten
 
@@ -53,10 +53,10 @@ raw_input("Press Enter to continue... ")
 GPIO.output(agitator_pin, GPIO.LOW)	# Ruehrwerk starten
 
 for i in range(mash_rest_nr):
-	while current_temp < mash_rest_temp[i]:
+	while current_temp() < mash_rest_temp[i]:
 		heater_control(mash_rest_temp[i])
 	print("heatup to mash rest" + str(i+1) +" completed") 
-	while current_mash_timer < mash_rest_time[i]:
+	while current_mash_timer < mash_rest_times[i]:
 		heater_control(mash_rest_temp[i])
 		current_mash_timer += relay_interval
 	print("mash rest" + str(i+1) +" completed")
