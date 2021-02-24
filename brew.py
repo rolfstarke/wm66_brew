@@ -16,7 +16,7 @@ current_mash_timer = 0
 heater_pin = 11             
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(heatr_pin, GPIO.OUT)
+GPIO.setup(heater_pin, GPIO.OUT)
 
 # input prompt fuer die zeit und temperatur in ein dict
 
