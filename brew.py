@@ -33,12 +33,12 @@ def heater_control(target_temp):
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
 		current_temp = W1ThermSensor().get_temperature()
-		print(current_temp + "A")
+		print(str(current_temp) + "A")
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
 		current_temp = W1ThermSensor().get_temperature()
-		print(current_temp + "B")
+		print(str(current_temp) + "B")
 
 # durchgehen der Rasten
 
