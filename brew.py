@@ -56,10 +56,12 @@ GPIO.output(agitator_pin, GPIO.LOW)	# Ruehrwerk starten
 for i in range(mash_rest_nr):
 	while current_temp() < mash_rest_temp[i]:
 		heater_control(mash_rest_temp[i])
-	print("heatup to mash rest" + str(i+1) +" completed") 
-	while current_mash_timer < mash_rest_times[i]:
+	print("heatup to mash rest" + str(i+1) +" completed")
+	localtime = time.time()
+	endtime = time.time() + mash_rest_times[i] 
+	while localtime < endtime:
 		heater_control(mash_rest_temp[i])
-		current_mash_timer += relay_interval
+		localtime = time.time()
 	print("mash rest" + str(i+1) +" completed")
 	current_mash_timer = 0
 
