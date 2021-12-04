@@ -6,10 +6,10 @@ GPIO.setwarnings(False)
 GPIO.setup(11, GPIO.OUT)
 GPIO.setup(13, GPIO.OUT)
 
-GPIO.output(11, GPIO.LOW)
-GPIO.output(13, GPIO.LOW)
-
-time.sleep(10)
-
-GPIO.output(11, GPIO.HIGH)
-GPIO.output(13, GPIO.HIGH)
+try:
+  while True:
+    GPIO.output(11, GPIO.LOW)
+    GPIO.output(13, GPIO.LOW)
+except KeyboardInterrupt:
+  GPIO.output(11, GPIO.HIGH)  
+  GPIO.output(13, GPIO.HIGH)
