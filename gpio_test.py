@@ -13,3 +13,4 @@ try:
 except KeyboardInterrupt:
   GPIO.output(11, GPIO.HIGH)  
   GPIO.output(13, GPIO.HIGH)
+  print("abgebrochen, fucker")
