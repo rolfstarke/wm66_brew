@@ -83,6 +83,8 @@ try:
 		current_mash_timer = 0
 except KeyboardInterrupt:
 	print("Was soll ich hier schreiben?")
+	GPIO.output(heater_pin, GPIO.HIGH)
+	GPIO.output(agitator_pin, GPIO.HIGH)
 	pass
 		
 GPIO.output(heater_pin, GPIO.HIGH)
