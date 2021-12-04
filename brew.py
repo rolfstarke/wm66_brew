@@ -37,7 +37,7 @@ def current_temp():
 
 # abbruchfunktion
 
-def abort()
+"""def abort()
 	while True:
 		if keyboard.read_key() == "q":
 			GPIO.output(heater_pim, GPIO.HIGH)
@@ -47,7 +47,7 @@ def abort()
 			current_temp = 0
 			current_mash_timer = 0
 			print("ende gelaende")
-			break
+			break"""
 
 # heizungssteuerung
 
@@ -69,19 +69,22 @@ def heater_control(target_temp):
 raw_input("Press Enter to continue... ")
 
 GPIO.output(agitator_pin, GPIO.LOW)	# Ruehrwerk starten
-
-for i in range(mash_rest_nr):
-	while current_temp() < mash_rest_temp[i]:
-		heater_control(mash_rest_temp[i])
-	print("heatup to mash rest" + str(i+1) +" completed")
-	localtime = time.time()
-	endtime = time.time() + mash_rest_times[i] 
-	while localtime < endtime:
-		heater_control(mash_rest_temp[i])
+try:
+	for i in range(mash_rest_nr):
+		while current_temp() < mash_rest_temp[i]:
+			heater_control(mash_rest_temp[i])
+		print("heatup to mash rest" + str(i+1) +" completed")
 		localtime = time.time()
-	print("mash rest" + str(i+1) +" completed")
-	current_mash_timer = 0
-
+		endtime = time.time() + mash_rest_times[i] 
+		while localtime < endtime:
+			heater_control(mash_rest_temp[i])
+			localtime = time.time()
+		print("mash rest" + str(i+1) +" completed")
+		current_mash_timer = 0
+except KeyboardInterrupt:
+	print("Was soll ich hier schreiben?")
+	pass
+		
 GPIO.output(heater_pin, GPIO.HIGH)
 GPIO.output(agitator_pin, GPIO.HIGH)
 print ("last mash completed, PROST")
