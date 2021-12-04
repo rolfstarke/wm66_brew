@@ -35,6 +35,20 @@ def current_temp():
 	temperature = W1ThermSensor().get_temperature()
 	return temperature
 
+# abbruchfunktion
+
+def abort()
+	while True:
+		if keyboard.read_key() == "q":
+			GPIO.output(heater_pim, GPIO.HIGH)
+			GPIO.output(agitator_pim, GPIO.HIGH)
+			mash_rest_times = {}
+			mash_rest_temp = {}
+			current_temp = 0
+			current_mash_timer = 0
+			print("ende gelaende")
+			break
+
 # heizungssteuerung
 
 def heater_control(target_temp):
@@ -43,10 +57,12 @@ def heater_control(target_temp):
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
 		print(str(current_temp()) + "A")
+		abort()
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
 		print(str(current_temp()) + "B")
+		abort()
 
 # durchgehen der Rasten
 
@@ -69,16 +85,3 @@ for i in range(mash_rest_nr):
 GPIO.output(heater_pin, GPIO.HIGH)
 GPIO.output(agitator_pin, GPIO.HIGH)
 print ("last mash completed, PROST")
-
-# abbruchfunktion
-
-while True:
-	if keyboard.read_key() == "q":
-		GPIO.output(heater_pim, GPIO.HIGH)
-		GPIO.output(agitator_pim, GPIO.HIGH)
-		mash_rest_times = {}
-		mash_rest_temp = {}
-		current_temp = 0
-		current_mash_timer = 0
-		print("ende gelaende")
-		break
