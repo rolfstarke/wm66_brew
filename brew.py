@@ -4,6 +4,7 @@
 
 import time
 import RPi.GPIO as GPIO
+import keyboard
 from w1thermsensor import W1ThermSensor
 
 mash_rest_nr = input("Ey Fucker, wieviele Rasten? ")
@@ -67,4 +68,17 @@ for i in range(mash_rest_nr):
 
 GPIO.output(heater_pin, GPIO.HIGH)
 GPIO.output(agitator_pin, GPIO.HIGH)
-print ("last mash completed")
+print ("last mash completed, PROST")
+
+# abbruchfunktion
+
+while True:
+	if keyboard.read_key() == "q":
+		GPIO.output(heater_pim, GPIO.HIGH)
+		GPIO.output(agitator_pim, GPIO.HIGH)
+		mash_rest_times = {}
+		mash_rest_temp = {}
+		current_temp = 0
+		current_mash_timer = 0
+		print("ende gelaende")
+		break
