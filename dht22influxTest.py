@@ -11,7 +11,7 @@ if humidity is not None and temperature is not None:
         influxHost = 'localhost'
         influxPort = '8086'
         influxUser = 'grafana'
-        influxPasswd = '12TUDdd.47'
+        influxPasswd = 'password'
         influxdbName = 'dhtTest'
 
         influx_metric = [{
