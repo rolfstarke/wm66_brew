@@ -3,19 +3,23 @@
 #-*- coding: utf-8 -*-
 
 import time
+import datetime
 import RPi.GPIO as GPIO
 import keyboard
 from w1thermsensor import W1ThermSensor
+from influxdb import client as influxdb
+from pytz import timezone
 
 mash_rest_nr = input("Ey Fucker, wieviele Rasten? ")
 mash_rest_times = {}
 mash_rest_temp = {}
 current_temp = 0
-relay_interval = 1
+relay_interval = 5
 current_mash_timer = 0
 agitator_pin =  13            
 heater_pin = 11             
 current_temp = W1ThermSensor().get_temperature()
+beerName = input("Wie heißt das Gesöff?") + str(datetime.date.now(timezone('CET')))
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -35,19 +39,29 @@ def current_temp():
 	temperature = W1ThermSensor().get_temperature()
 	return temperature
 
-# abbruchfunktion
 
-"""def abort()
-	while True:
-		if keyboard.read_key() == "q":
-			GPIO.output(heater_pim, GPIO.HIGH)
-			GPIO.output(agitator_pim, GPIO.HIGH)
-			mash_rest_times = {}
-			mash_rest_temp = {}
-			current_temp = 0
-			current_mash_timer = 0
-			print("ende gelaende")
-			break"""
+
+#influxdb schreiben
+
+def writeInflux(temp):
+	influxMetric = [{
+		'measurement': 'beerName',
+		'time': datetime.datetime.now(timezone('CET')),
+		'fields': {'temperature': temp}
+	}]
+
+	influxHost = 'localhost'
+	influxPort = '8086'
+	influxUser = 'grafana'
+	influxPasswd = 'ERZ2022WM66'
+	influxdbName = 'brew_temperature'
+
+	try:
+		db = influxdb.InfluxDBClient(influxHost, influxPort, influxUser, influxPasswd, influxdbName)
+		db.write_points(influxMetric)
+	finally:
+		db.close()
+
 
 # heizungssteuerung
 
@@ -57,11 +71,13 @@ def heater_control(target_temp):
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
 		print(str(current_temp()) + "A")
+		writeInflux(current_temp())
 		abort()
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
 		print(str(current_temp()) + "B")
+		writeInflux(current_temp())
 		abort()
 
 # durchgehen der Rasten
@@ -86,7 +102,25 @@ except KeyboardInterrupt:
 	GPIO.output(heater_pin, GPIO.HIGH)
 	GPIO.output(agitator_pin, GPIO.HIGH)
 	pass
-		
+
+
+
+
 GPIO.output(heater_pin, GPIO.HIGH)
 GPIO.output(agitator_pin, GPIO.HIGH)
 print ("last mash completed, PROST")
+
+
+# abbruchfunktion
+
+"""def abort():
+	while True:
+		if keyboard.read_key() == "q":
+			GPIO.output(heater_pim, GPIO.HIGH)
+			GPIO.output(agitator_pim, GPIO.HIGH)
+			mash_rest_times = {}
+			mash_rest_temp = {}
+			current_temp = 0
+			current_mash_timer = 0
+			print("ende gelaende")
+			break"""
