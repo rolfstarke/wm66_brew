@@ -10,8 +10,8 @@ from w1thermsensor import W1ThermSensor
 from influxdb import client as influxdb
 from pytz import timezone
 
-beer_name = input("Ey, wie heißt das Gesöff?") + str(datetime.date.today())
-mash_rest_nr = int(input("Fucker, wieviele Rasten? "))
+beer_name = input("Ey Fucker, wie heißt das Gesöff? ") + str(datetime.date.today())
+mash_rest_nr = int(input("Wieviele Rasten? "))
 mash_rest_times = {}
 mash_rest_temp = {}
 current_temp = 0
@@ -73,13 +73,11 @@ def heater_control(target_temp):
 		time.sleep(relay_interval)
 		print("current temperature: " + str(current_temp()) + " heater: on")
 		writeInflux(current_temp())
-		abort()
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
 		print("current temperature: " + str(current_temp()) + " heater: idle")
 		writeInflux(current_temp())
-		abort()
 
 # durchgehen der Rasten
 
