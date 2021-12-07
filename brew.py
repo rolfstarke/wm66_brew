@@ -83,7 +83,7 @@ def heater_control(target_temp):
 
 # durchgehen der Rasten
 
-raw_input("Press Enter to continue... ")
+input("Press Enter to continue... ")
 
 GPIO.output(agitator_pin, GPIO.LOW)	# Ruehrwerk starten
 try:
