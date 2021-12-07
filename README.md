@@ -6,7 +6,7 @@ We turned the GDR washing machine "WM66" into an brewing kettle.
 
 [This](https://braumagazin.de/article/bierbrauen-mit-der-wm66-teil-1/) and [this](https://braumagazin.de/article/bierbrauen-mit-der-wm66-teil-2/) served as an inspiration, but we control the heating and the agitator of the wm66 via a relay with a raspberry pi 4.
 
-the pi is flashed with Raspberry Pi OS Lite (64-bit)
+the pi is flashed with Raspberry Pi OS Lite (32-bit)
 
 [this](https://raspap.com/) is used to create an hotspot with the raspberry pi. In our case the SSH connection is established with:
 
