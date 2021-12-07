@@ -10,7 +10,7 @@ from w1thermsensor import W1ThermSensor
 from influxdb import client as influxdb
 from pytz import timezone
 
-beer_name = input("Ey, wie heißt das Gesöff?") + str(datetime.date.today(timezone('CET')))
+beer_name = input("Ey, wie heißt das Gesöff?") + str(datetime.date.today())
 mash_rest_nr = input("Fucker, wieviele Rasten? ")
 mash_rest_times = {}
 mash_rest_temp = {}
