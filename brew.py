@@ -46,7 +46,7 @@ def current_temp():
 
 def writeInflux(temp):
 	influxMetric = [{
-		'measurement': str(beer_name),
+		'measurement': beer_name,
 		'time': datetime.datetime.now(timezone('CET')),
 		'fields': {'temperature': temp}
 	}]
@@ -71,12 +71,12 @@ def heater_control(target_temp):
 	if current_temp() < target_temp :
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
-		print("current temperature: " + str(current_temp()) + "C° " + "| heater: on")
+		print("current temperature: " + str(current_temp()) + " °C " + "| heater: on")
 		writeInflux(current_temp())
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
-		print("current temperature: " + str(current_temp()) + "C° " + "| heater: idle")
+		print("current temperature: " + str(current_temp()) + " °C " + "| heater: idle")
 		writeInflux(current_temp())
 
 # durchgehen der Rasten
@@ -100,7 +100,7 @@ try:
 except KeyboardInterrupt:
 	GPIO.output(heater_pin, GPIO.HIGH)
 	GPIO.output(agitator_pin, GPIO.HIGH)
-	print("Hau ab!")
+	print(" Hau ab!")
 	pass
 
 
