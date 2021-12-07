@@ -19,7 +19,7 @@ current_mash_timer = 0
 agitator_pin =  13            
 heater_pin = 11             
 current_temp = W1ThermSensor().get_temperature()
-beerName = input("Wie heißt das Gesöff?") + str(datetime.date.now(timezone('CET')))
+beer_name = input("Wie heißt das Gesöff?") + str(datetime.date.now(timezone('CET')))
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -45,7 +45,7 @@ def current_temp():
 
 def writeInflux(temp):
 	influxMetric = [{
-		'measurement': 'beerName',
+		'measurement': beer_name,
 		'time': datetime.datetime.now(timezone('CET')),
 		'fields': {'temperature': temp}
 	}]
@@ -70,13 +70,13 @@ def heater_control(target_temp):
 	if current_temp() < target_temp :
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
-		print(str(current_temp()) + "A")
+		print("current temperature: " + str(current_temp()) + " heater: on")
 		writeInflux(current_temp())
 		abort()
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
-		print(str(current_temp()) + "B")
+		print("current temperature: " + str(current_temp()) + " heater: idle")
 		writeInflux(current_temp())
 		abort()
 
