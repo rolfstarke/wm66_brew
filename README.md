@@ -15,18 +15,22 @@ ssh pi@10.3.141.1
 ```
 
 [this](https://pimylifeup.com/raspberry-pi-influxdb/) is used to create a influxdb database
+[this](https://simonhearne.com/2020/pi-influx-grafana/) as an example for influxdb database creation and user creation
 
 get pip.
 
 ```
-sudo apt-get install python-pip
+sudo apt-get install python3-pip
 ```
 
 The temperature sensor DS18B20 is connected to the raspberry pi like [this](https://pimylifeup.com/raspberry-pi-temperature-sensor/) and implemented with the [wm1thermsensor](https://github.com/timofurrer/w1thermsensor) python module.
 
 ```
-pip install w1thermsensor
+pip3 install w1thermsensor
 ```
+
+Enable 1-Wire in Interfacing Options in raspi-config
+
 
 https://pimylifeup.com/raspberry-pi-temperature-sensor/
 
