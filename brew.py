@@ -15,7 +15,7 @@ mash_rest_nr = int(input("Wieviele Rasten? "))
 mash_rest_times = {}
 mash_rest_temp = {}
 current_temp = 0
-relay_interval = 10
+relay_interval = 5
 current_mash_timer = 0
 agitator_pin =  13            
 heater_pin = 11             
@@ -71,12 +71,12 @@ def heater_control(target_temp):
 	if current_temp() < target_temp :
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
-		print("current temperature: " + str(current_temp()) + " °C " + "| heater: on")
+		print("current temperature: " + str(current_temp()) + " °C " + "| heater: on", end='\r')
 		writeInflux(current_temp())
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
-		print("current temperature: " + str(current_temp()) + " °C " + "| heater: idle")
+		print("current temperature: " + str(current_temp()) + " °C " + "| heater: idle", end='\r')
 		writeInflux(current_temp())
 
 # durchgehen der Rasten
