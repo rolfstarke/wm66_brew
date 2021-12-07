@@ -35,9 +35,9 @@ Enable 1-Wire in Interfacing Options in raspi-config
 
 https://pimylifeup.com/raspberry-pi-temperature-sensor/
 
-'''
+```
 wget https://dl.influxdata.com/influxdb/releases/influxdb2-2.0.3-linux-arm64.deb
-'''
+```
 
 #setup influxdb and grafana
 https://www.circuits.dk/temperature-logger-running-on-raspberry-pi/
