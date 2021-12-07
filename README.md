@@ -29,6 +29,9 @@ The temperature sensor DS18B20 is connected to the raspberry pi like [this](http
 pip3 install w1thermsensor
 ```
 
+Enable 1-Wire in Interfacing Options in raspi-config
+
+
 https://pimylifeup.com/raspberry-pi-temperature-sensor/
 
 wget https://dl.influxdata.com/influxdb/releases/influxdb2-2.0.3-linux-arm64.deb
