@@ -46,7 +46,7 @@ def current_temp():
 
 def writeInflux(temp):
 	influxMetric = [{
-		'measurement': beer_name,
+		'measurement': str(beer_name),
 		'time': datetime.datetime.now(timezone('CET')),
 		'fields': {'temperature': temp}
 	}]
@@ -96,6 +96,7 @@ try:
 			localtime = time.time()
 		print("mash rest" + str(i+1) +" completed")
 		current_mash_timer = 0
+	print ("last mash completed, Prost!")
 except KeyboardInterrupt:
 	print("Was soll ich hier schreiben?")
 	GPIO.output(heater_pin, GPIO.HIGH)
@@ -107,7 +108,7 @@ except KeyboardInterrupt:
 
 GPIO.output(heater_pin, GPIO.HIGH)
 GPIO.output(agitator_pin, GPIO.HIGH)
-print ("last mash completed, PROST")
+
 
 
 # abbruchfunktion
