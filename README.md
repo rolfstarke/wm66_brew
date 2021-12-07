@@ -15,6 +15,7 @@ ssh pi@10.3.141.1
 ```
 
 [this](https://pimylifeup.com/raspberry-pi-influxdb/) is used to create a influxdb database
+[this](https://simonhearne.com/2020/pi-influx-grafana/) as an example for influxdb database creation and user creation
 
 get pip.
 
