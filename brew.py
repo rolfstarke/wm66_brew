@@ -10,7 +10,7 @@ from w1thermsensor import W1ThermSensor
 from influxdb import client as influxdb
 from pytz import timezone
 
-beer_name = input("Ey Fucker, wie heißt das Gesöff? ") + str(datetime.date.today())
+beer_name = input("Ey Fucker, wie heißt das Gesöff? ") + " " + str(datetime.date.today())
 mash_rest_nr = int(input("Wieviele Rasten? "))
 mash_rest_times = {}
 mash_rest_temp = {}
@@ -71,12 +71,12 @@ def heater_control(target_temp):
 	if current_temp() < target_temp :
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
-		print("current temperature: " + str(current_temp()) + " heater: on")
+		print("current temperature: " + str(current_temp()) + "C°" + "| heater: on")
 		writeInflux(current_temp())
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
-		print("current temperature: " + str(current_temp()) + " heater: idle")
+		print("current temperature: " + str(current_temp()) + "C°" + "| heater: idle")
 		writeInflux(current_temp())
 
 # durchgehen der Rasten
@@ -88,13 +88,13 @@ try:
 	for i in range(mash_rest_nr):
 		while current_temp() < mash_rest_temp[i]:
 			heater_control(mash_rest_temp[i])
-		print("heatup to mash rest" + str(i+1) +" completed")
+		print("heatup to mash rest " + str(i+1) +" completed")
 		localtime = time.time()
 		endtime = time.time() + mash_rest_times[i] 
 		while localtime < endtime:
 			heater_control(mash_rest_temp[i])
 			localtime = time.time()
-		print("mash rest" + str(i+1) +" completed")
+		print("mash rest " + str(i+1) +" completed")
 		current_mash_timer = 0
 	print ("last mash completed, Prost!")
 except KeyboardInterrupt:
