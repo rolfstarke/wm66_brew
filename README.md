@@ -19,13 +19,13 @@ ssh pi@10.3.141.1
 get pip.
 
 ```
-sudo apt-get install python-pip
+sudo apt-get install python3-pip
 ```
 
 The temperature sensor DS18B20 is connected to the raspberry pi like [this](https://pimylifeup.com/raspberry-pi-temperature-sensor/) and implemented with the [wm1thermsensor](https://github.com/timofurrer/w1thermsensor) python module.
 
 ```
-pip install w1thermsensor
+pip3 install w1thermsensor
 ```
 
 https://pimylifeup.com/raspberry-pi-temperature-sensor/
