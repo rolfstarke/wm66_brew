@@ -10,7 +10,8 @@ from w1thermsensor import W1ThermSensor
 from influxdb import client as influxdb
 from pytz import timezone
 
-mash_rest_nr = input("Ey Fucker, wieviele Rasten? ")
+beer_name = input("Ey, wie heißt das Gesöff?") + str(datetime.date.today(timezone('CET')))
+mash_rest_nr = input("Fucker, wieviele Rasten? ")
 mash_rest_times = {}
 mash_rest_temp = {}
 current_temp = 0
@@ -19,7 +20,7 @@ current_mash_timer = 0
 agitator_pin =  13            
 heater_pin = 11             
 current_temp = W1ThermSensor().get_temperature()
-beer_name = input("Wie heißt das Gesöff?") + str(datetime.date.now(timezone('CET')))
+
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
