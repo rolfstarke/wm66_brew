@@ -44,11 +44,11 @@ def current_temp():
 
 #influxdb schreiben
 
-def writeInflux(temp):
+def writeInflux(temp, target):
 	influxMetric = [{
 		'measurement': beer_name,
 		'time': datetime.datetime.now(timezone('CET')),
-		'fields': {'temperature': temp}
+		'fields': {'temperature': temp, 'target_temperature': target}
 	}]
 
 	influxHost = 'localhost'
@@ -72,12 +72,12 @@ def heater_control(target_temp):
 		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
 		print("current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: on    ", end='\r')
-		writeInflux(current_temp())
+		writeInflux(current_temp(), target_temp)
 	else:
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
 		print("current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: idle    ", end='\r')
-		writeInflux(current_temp())
+		writeInflux(current_temp(), target_temp)
 
 # durchgehen der Rasten
 
