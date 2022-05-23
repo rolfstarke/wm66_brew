@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\php",
+    "\\tests"
   ],
-  "SelectedNode": "\\php",
+  "SelectedNode": "\\brew.py",
   "PreviewInSolutionExplorer": false
 }
