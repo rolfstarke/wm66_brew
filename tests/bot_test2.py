@@ -2,7 +2,7 @@ import requests
 import json
 
 def sendMsg(msg):
-    #Pfad zum Token einfügen    
+    #Pfad zum Token einfuegen    
     with open("token.txt") as file:
         token = file.read().splitlines()
     url = f"https://api.telegram.org/bot{token[0]}/sendMessage"

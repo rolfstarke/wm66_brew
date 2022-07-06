@@ -1,8 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\tests"
+    ""
   ],
-  "SelectedNode": "\\tests\\bot_test.py",
+  "SelectedNode": "\\bot_send_msg.py",
   "PreviewInSolutionExplorer": false
 }
