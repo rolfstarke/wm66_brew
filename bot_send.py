@@ -1,5 +1,4 @@
 import requests
-import json
 
 def sendMsg(msg):
     #Pfad zum Token einfügen    
