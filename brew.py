@@ -103,7 +103,7 @@ try:
 		while localtime < endtime:
 			heater_control(mash_rest_temp[i])
 			localtime = time.time()
-			if(endtime-localtime <= 120 and rest_reminder == false):
+			if endtime-localtime <= 120 and rest_reminder == false:
 				bot_send.sendMsg("Rast Nr." + str(i+1) + " in 2 Min. fertig.")
 				rest_reminder = true
 		print("mash rest " + str(i+1) +" completed")
