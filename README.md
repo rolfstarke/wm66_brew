@@ -8,10 +8,10 @@ We turned the GDR washing machine "WM66" into an brewing kettle.
 
 the pi is flashed with Raspberry Pi OS Lite (32-bit)
 
-[this](https://raspap.com/) is used to create an hotspot with the raspberry pi. In our case the SSH connection is established with:
+[this](https://www.elektronik-kompendium.de/sites/raspberry-pi/2002171.htm) is used to create an hotspot with the raspberry pi. In our case the SSH connection is established with:
 
 ```
-ssh pi@10.3.141.1
+ssh pi@192.168.1.1
 ```
 
 [this](https://pimylifeup.com/raspberry-pi-influxdb/) is used to create a influxdb database
