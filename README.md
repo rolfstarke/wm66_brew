@@ -13,16 +13,17 @@ the pi is flashed with Raspberry Pi OS Lite (32-bit)
 ```
 ssh pi@192.168.1.1
 ```
-sudo apt install git
-```
+
+
 
 [this](https://pimylifeup.com/raspberry-pi-influxdb/) is used to create a influxdb database
 
 [this](https://simonhearne.com/2020/pi-influx-grafana/) as an example for influxdb database creation and user creation
 
-get pip.
+get pip and git
 
 ```
+sudo apt install git
 sudo apt-get install python3-pip
 ```
 
