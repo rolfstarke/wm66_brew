@@ -1,0 +1,2 @@
+*.gcode -linguist-detectable
+tests/php/inspiration.php -linguist-detectable
