@@ -26,8 +26,8 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 GPIO.setup(heater_pin, GPIO.OUT)
 GPIO.setup(agitator_pin, GPIO.OUT)
-GPIO.output(heater_pin, GPIO.HIGH)
-GPIO.output(agitator_pin, GPIO.HIGH)
+GPIO.output(heater_pin, GPIO.LOW)
+GPIO.output(agitator_pin, GPIO.LOW)
 
 # input prompt fuer die zeit und temperatur in ein dict
 
@@ -69,12 +69,12 @@ def writeInflux(temp, target):
 def heater_control(target_temp):
 	
 	if current_temp() < target_temp :
-		GPIO.output(heater_pin, GPIO.LOW)
+		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
 		print(str(datetime.datetime.now(timezone('CET'))) + " | current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: on    ", end='\r')
 		writeInflux(current_temp(), target_temp)
 	else:
-		GPIO.output(heater_pin, GPIO.HIGH)
+		GPIO.output(heater_pin, GPIO.LOW)
 		time.sleep(relay_interval)
 		print(str(datetime.datetime.now(timezone('CET'))) + " | current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: idle    ", end='\r')
 		writeInflux(current_temp(), target_temp)
@@ -83,7 +83,7 @@ def heater_control(target_temp):
 
 input("Press Enter to continue... ")
 
-GPIO.output(agitator_pin, GPIO.LOW)	# Ruehrwerk starten
+GPIO.output(agitator_pin, GPIO.HIGH)	# Ruehrwerk starten
 try:
 	for i in range(mash_rest_nr):
 		while current_temp() < mash_rest_temp[i]:
@@ -98,16 +98,16 @@ try:
 		current_mash_timer = 0
 	print ("last mash completed, Prost!")
 except KeyboardInterrupt:
-	GPIO.output(heater_pin, GPIO.HIGH)
-	GPIO.output(agitator_pin, GPIO.HIGH)
+	GPIO.output(heater_pin, GPIO.LOW)
+	GPIO.output(agitator_pin, GPIO.LOW)
 	print(" Hau ab!")
 	pass
 
 
 
 
-GPIO.output(heater_pin, GPIO.HIGH)
-GPIO.output(agitator_pin, GPIO.HIGH)
+GPIO.output(heater_pin, GPIO.LOW)
+GPIO.output(agitator_pin, GPIO.LOW)
 
 
 

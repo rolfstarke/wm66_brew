@@ -8,9 +8,9 @@ GPIO.setup(13, GPIO.OUT)
 
 try:
   while True:
-    GPIO.output(11, GPIO.LOW)
     GPIO.output(13, GPIO.LOW)
+    GPIO.output(11, GPIO.HIGH)
 except KeyboardInterrupt:
-  GPIO.output(11, GPIO.HIGH)  
-  GPIO.output(13, GPIO.HIGH)
-  print("abgebrochen, fucker")
+    GPIO.output(13, GPIO.HIGH)  
+    GPIO.output(11, GPIO.LOW)
+    print("abgebrochen, fucker")
