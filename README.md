@@ -13,6 +13,8 @@ the pi is flashed with Raspberry Pi OS Lite (32-bit)
 ```
 ssh pi@192.168.1.1
 ```
+sudo apt install git
+```
 
 [this](https://pimylifeup.com/raspberry-pi-influxdb/) is used to create a influxdb database
 
