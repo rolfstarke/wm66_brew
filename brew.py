@@ -24,7 +24,7 @@ relay_interval = 1
 current_mash_timer = 0
 agitator_pin =  13            
 heater_pin = 11   
-rest_reminder = false #damit nicht die letzten 2 minuten der rast alle sekunde eine nachricht kommt
+rest_reminder = False #damit nicht die letzten 2 minuten der rast alle sekunde eine nachricht kommt
 current_temp = W1ThermSensor().get_temperature() #und das?
 
 
