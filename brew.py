@@ -24,7 +24,9 @@ relay_interval = 1
 current_mash_timer = 0
 agitator_pin =  13            
 heater_pin = 11   
-rest_reminder = False #damit nicht die letzten 2 minuten der rast alle sekunde eine nachricht kommt
+rest_reminder = 
+
+#damit nicht die letzten 2 minuten der rast alle sekunde eine nachricht kommt
 current_temp = W1ThermSensor().get_temperature() #und das?
 
 
@@ -97,15 +99,15 @@ try:
 			heater_control(mash_rest_temp[i])
 		print("heatup to mash rest " + str(i+1) +" completed")
 		bot_send.sendMsg("Rasttemperatur Nr." + str(i+1) + " erreicht.")
-		rest_reminder = false
+		rest_reminder = False
 		localtime = time.time()
 		endtime = time.time() + mash_rest_times[i] 
 		while localtime < endtime:
 			heater_control(mash_rest_temp[i])
 			localtime = time.time()
-			if endtime-localtime <= 120 and rest_reminder == false:
+			if endtime-localtime <= 120 and rest_reminder == False:
 				bot_send.sendMsg("Rast Nr." + str(i+1) + " in 2 Min. fertig.")
-				rest_reminder = true
+				rest_reminder = True
 		print("mash rest " + str(i+1) +" completed")
 		bot_send.sendMsg("Rast Nr." + str(i+1) + " fertig.")
 		current_mash_timer = 0
