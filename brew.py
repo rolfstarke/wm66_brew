@@ -71,7 +71,7 @@ def heater_control(target_temp):
 	if current_temp() < target_temp :
 		GPIO.output(heater_pin, GPIO.HIGH)
 		time.sleep(relay_interval)
-		print("["str(datetime.datetime.now(timezone('CET')))"]" + " | current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: on    ", end='\r')
+		print("[" + str(datetime.datetime.now(timezone('CET'))) + "]" + " | current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: on    ", end='\r')
 		writeInflux(current_temp(), target_temp)
 	else:
 		GPIO.output(heater_pin, GPIO.LOW)
