@@ -20,7 +20,7 @@ mash_rest_nr = int(input("Wieviele Rasten? "))
 mash_rest_times = {}
 mash_rest_temp = {}
 current_temp = 0 #brauchen wir das noch?
-relay_interval = 1
+relay_interval = 5
 current_mash_timer = 0
 agitator_pin =  13            
 heater_pin = 11   
@@ -78,14 +78,14 @@ def heater_control(target_temp):
 	
 	if current_temp() < target_temp :
 		GPIO.output(heater_pin, GPIO.HIGH)
-		time.sleep(relay_interval)
 		print("[" + str(datetime.datetime.now(timezone('CET'))) + "]" + " | current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: on    ", end='\r')
 		writeInflux(current_temp(), target_temp)
+		time.sleep(relay_interval)
 	else:
 		GPIO.output(heater_pin, GPIO.LOW)
-		time.sleep(relay_interval)
 		print("[" + str(datetime.datetime.now(timezone('CET'))) + "]" + " | current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: idle    ", end='\r')
 		writeInflux(current_temp(), target_temp)
+		time.sleep(relay_interval)
 
 # durchgehen der Rasten
 
@@ -120,24 +120,5 @@ except KeyboardInterrupt:
 	bot_send.sendMsg("Brauvorgang abgebrochen, ihr Halunken!")
 	pass
 
-
-
-
 GPIO.output(heater_pin, GPIO.LOW)
 GPIO.output(agitator_pin, GPIO.LOW)
-
-
-
-# abbruchfunktion
-
-"""def abort():
-	while True:
-		if keyboard.read_key() == "q":
-			GPIO.output(heater_pim, GPIO.HIGH)
-			GPIO.output(agitator_pim, GPIO.HIGH)
-			mash_rest_times = {}
-			mash_rest_temp = {}
-			current_temp = 0
-			current_mash_timer = 0
-			print("ende gelaende")
-			break"""
