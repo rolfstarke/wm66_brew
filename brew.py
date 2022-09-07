@@ -6,9 +6,9 @@ import bot_send
 # muss irgendwie sein...
 argumentList = sys.argv[1:]
 # Options
-options = "tmw"
+options = "tmwh"
 # Long Options
-long_options = ["Telegram", "Mash", "Wort"]
+long_options = ["Telegram", "Mash", "Wort", "Help"]
 
 try:
     # Parsing argument
@@ -28,7 +28,10 @@ try:
         elif currentArgument in ("-w", "--Wort"):
             bot_send.sendMsg("Würzekochen!")
             subprocess.call("wort.py", Shell=True)
+            
+        elif currentArgument in ("-h", "--Help"):
+            print("Erklärung...")
              
 except getopt.error as err:
     # output error, and return with an error code
-    print (str(err))
+    print(str(err))
