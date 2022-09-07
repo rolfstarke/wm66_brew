@@ -9,9 +9,6 @@ import keyboard
 from w1thermsensor import W1ThermSensor
 from influxdb import client as influxdb
 from pytz import timezone
-#eventuell den pfad zur bot_send.py einfuegen
-#import sys
-#sys.path.append('hier pfad')
 import bot_send
 
 beer_name = input("Ey Fucker, wie heißt das Gesöff? ") + " " + str(datetime.date.today())
