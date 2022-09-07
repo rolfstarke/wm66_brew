@@ -19,15 +19,15 @@ try:
  
         if currentArgument in ("-t", "--Telegram"):
             bot_send.sendMsg("Ich hoere zu.")
-            import bot_listen
+            subprocess.call("bot_listen.py", Shell=False)
              
         elif currentArgument in ("-m", "--Mash"):
             bot_send.sendMsg("Es wird eingemaischt!")
-            import mash
+            subprocess.call("mash.py", Shell=True)
              
         elif currentArgument in ("-w", "--Wort"):
             bot_send.sendMsg("Würzekochen!")
-            import wort
+            subprocess.call("wort.py", Shell=True)
              
 except getopt.error as err:
     # output error, and return with an error code
