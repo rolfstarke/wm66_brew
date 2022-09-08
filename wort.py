@@ -13,16 +13,12 @@ bot_send.sendMsg("Guten Tag! Wir brauen heute " + beer_name)
 mash_rest_nr = int(input("Wieviele Rasten? "))
 mash_rest_times = {}
 mash_rest_temp = {}
-current_temp = 0 #brauchen wir das noch?
 relay_interval = 5
 current_mash_timer = 0
 agitator_pin =  13            
 heater_pin = 11   
 rest_reminder = False
-
 #damit nicht die letzten 2 minuten der rast alle sekunde eine nachricht kommt
-current_temp = W1ThermSensor().get_temperature() #und das?
-
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
