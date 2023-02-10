@@ -1,114 +1,50 @@
 # anpassen ans würzekochen
+
 import time
-import datetime
 import RPi.GPIO as GPIO
-import keyboard
-from w1thermsensor import W1ThermSensor
-from influxdb import client as influxdb
-from pytz import timezone
-import bot_send
-
-beer_name = input("Ey Fucker, wie heißt das Gesöff? ") + " " + str(datetime.date.today())
-bot_send.sendMsg("Guten Tag! Wir brauen heute " + beer_name)
-mash_rest_nr = int(input("Wieviele Rasten? "))
-mash_rest_times = {}
-mash_rest_temp = {}
-relay_interval = 5
-current_mash_timer = 0
-agitator_pin =  13            
-heater_pin = 11   
-rest_reminder = False
-#damit nicht die letzten 2 minuten der rast alle sekunde eine nachricht kommt
-
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(heater_pin, GPIO.OUT)
-GPIO.setup(agitator_pin, GPIO.OUT)
-GPIO.output(heater_pin, GPIO.LOW)
-GPIO.output(agitator_pin, GPIO.LOW)
-
-# input prompt fuer die zeit und temperatur in ein dict
-
-for i in range(mash_rest_nr):
-    mash_rest_times[i] = int(input("Wieviele Minuten fuer Rast Nr. "+str(i+1)+"? ")) * 60
-    mash_rest_temp[i] = float(input("Rast Nr. "+str(i+1)+ " auf welcher Temperatur? ")) 
-
-def current_temp():
-
-	temperature = W1ThermSensor().get_temperature()
-	return temperature
+from utils import current_temp
+from utils import heater_control
+from utils import sendMsg
+from utils import writeInflux
 
 
+class xhopping:
+    '''object that stores its number, the time, and the message status for a hopping'''
 
-#influxdb schreiben
-
-def writeInflux(temp, target):
-	influxMetric = [{
-		'measurement': beer_name,
-		'time': datetime.datetime.now(timezone('CET')),
-		'fields': {'temperature': temp, 'target_temperature': target}
-	}]
-
-	influxHost = 'localhost'
-	influxPort = '8086'
-	influxUser = 'grafana'
-	influxPasswd = 'ERZ2022WM66'
-	influxdbName = 'brew_temperature'
-
-	try:
-		db = influxdb.InfluxDBClient(influxHost, influxPort, influxUser, influxPasswd, influxdbName)
-		db.write_points(influxMetric)
-	finally:
-		db.close()
+    def __init__(self, order):
+        self.number = order
+        self.time = int(
+            input("Hopfengabe " + str(self.number)+" bei wieviel Minuten? ")) * 60
+        self.noticed = False
+        self.instructed = False
 
 
-# heizungssteuerung
-
-def heater_control(target_temp):
-	
-	if current_temp() < target_temp :
-		GPIO.output(heater_pin, GPIO.HIGH)
-		print("[" + str(datetime.datetime.now(timezone('CET'))) + "]" + " | current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: on    ", end='\r')
-		writeInflux(current_temp(), target_temp)
-		time.sleep(relay_interval)
-	else:
-		GPIO.output(heater_pin, GPIO.LOW)
-		print("[" + str(datetime.datetime.now(timezone('CET'))) + "]" + " | current temperature: " + str(round(current_temp(), 1)) + " °C " + "| heater: idle    ", end='\r')
-		writeInflux(current_temp(), target_temp)
-		time.sleep(relay_interval)
-
-# durchgehen der Rasten
-
-input("Press Enter to continue... ")
-bot_send.sendMsg("Brauen gestartet, wenn das mal gut geht...")
-
-GPIO.output(agitator_pin, GPIO.HIGH)	# Ruehrwerk starten
-try:
-	for i in range(mash_rest_nr):
-		while current_temp() < mash_rest_temp[i]:
-			heater_control(mash_rest_temp[i])
-		print("heatup to mash rest " + str(i+1) +" completed")
-		bot_send.sendMsg("Rasttemperatur Nr." + str(i+1) + " erreicht.")
-		rest_reminder = False
+def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
+	hoppings = []
+	wort_time = int(input("Wieviele Minuten soll die Wuerze gekocht werden "+str(i+1)+"? ")) * 60
+	tmp = int(input("Wieviele Hopfengaben? "))
+	GPIO.output(agitator_pin, GPIO.HIGH)  # Ruehrwerk starten
+	for i in tmp:
+		hoppings.append(xhopping(i+1))
+		while current_temp() < 95:
+			heater_control(98, heater_pin, relay_interval)
+			writeInflux(current_temp(), 98, measurement_name)
+		print("starting wort")
+		sendMsg("Wuerzekochen!")
 		localtime = time.time()
-		endtime = time.time() + mash_rest_times[i] 
+		endtime = time.time() + wort_time
 		while localtime < endtime:
-			heater_control(mash_rest_temp[i])
+			heater_control(98, heater_pin, relay_interval)
+			writeInflux(current_temp(), 98)
 			localtime = time.time()
-			if endtime-localtime <= 120 and rest_reminder == False:
-				bot_send.sendMsg("Rast Nr." + str(i+1) + " in 2 Min. fertig.")
-				rest_reminder = True
-		print("mash rest " + str(i+1) +" completed")
-		bot_send.sendMsg("Rast Nr." + str(i+1) + " fertig.")
-		current_mash_timer = 0
-	print ("last mash completed, Prost!")
-	bot_send.sendMsg("Letzte Rast fertig, ihr Schwerenoeter. Schmecken lassen!")
-except KeyboardInterrupt:
+			for i in range(hoppings):
+				if 1 <= endtime-localtime-hoppings[i].time <= 120 and hoppings[i].noticed == False:
+					sendMsg("Hopfengabe" + hoppings[i].number + " in 2 Minuten")
+					hoppings[i].noticed = True
+					if endtime-localtime-hoppings[i].time <= 0 and hoppings[i].instructed == False:
+						sendMsg("Hopfengabe! Hopfengabe Nr" + hoppings[i].number + "! ZackZack")
+					hoppings[i].instructed = True
+	print("wort completed")
+	sendMsg("Wuerzekochen abgeschlossen")
 	GPIO.output(heater_pin, GPIO.LOW)
 	GPIO.output(agitator_pin, GPIO.LOW)
-	print("Hau ab!")
-	bot_send.sendMsg("Brauvorgang abgebrochen, ihr Halunken!")
-	pass
-
-GPIO.output(heater_pin, GPIO.LOW)
-GPIO.output(agitator_pin, GPIO.LOW)
