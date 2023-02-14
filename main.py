@@ -56,7 +56,7 @@ args = parser.parse_args()
 try:
     if args.telegram:
         sendMsg("Ich hoere zu.")
-        brew_package.bot_listen
+        # brew_package.bot_listen
 
     elif args.heat:
         heat(heater_pin, relay_interval)
@@ -71,12 +71,10 @@ try:
         cool(relay_interval, beer_name)
 
     elif args.wort:
-        wort(agitator_pin, config.get(
-            'main', 'heater_pin'), relay_interval, beer_name)
+        wort(agitator_pin, heater_pin, relay_interval, beer_name)
 
     elif args.mash:
-        mash(agitator_pin, config.get(
-            'main', 'heater_pin'), relay_interval, beer_name)
+        mash(agitator_pin, heater_pin, relay_interval, beer_name)
 
 except KeyboardInterrupt:
     GPIO.output(heater_pin, GPIO.LOW)
