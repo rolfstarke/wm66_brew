@@ -21,7 +21,7 @@ class xhopping:
 
 def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 	hoppings = []
-	wort_time = int(input("Wieviele Minuten soll die Wuerze gekocht werden "+str(i+1)+"? ")) * 60
+	wort_time = int(input("Wieviele Minuten soll die Wuerze gekocht werden? ")) * 60
 	tmp = int(input("Wieviele Hopfengaben? "))
 	GPIO.output(agitator_pin, GPIO.HIGH)  # Ruehrwerk starten
 	for i in tmp:
