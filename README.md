@@ -58,7 +58,7 @@ tmux ls
 tmux new -s sessionname
 tmux attach-session -t sessionname
 ```
-#Detach from session
+#detach from session, shortcut
 ```
 Ctrl + b d
 ```
