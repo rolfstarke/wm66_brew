@@ -52,22 +52,21 @@ pw: schwarz3nb3rg
 ```
 sudo apt-get install tmux 
 ```
-# relevant tmux commands
+#relevant tmux commands
 ```
 tmux ls
 ```
 ```
-tmux new -s "sessionname"
-```
-# Detach from session
-```
-Ctrl + b d
+tmux new -s sessionname
 ```
 ```
 tmux attach-session -t sessionname
 ```
-
-# more tmux commands
+#Detach from session
+```
+Ctrl + b d
+```
+#more tmux commands
 [this](https://comtronic.com.au/blog/wp-content/uploads/comtronic_cheatsheet_tmux_A4.pdf)
 
 
