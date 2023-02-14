@@ -55,11 +55,7 @@ sudo apt-get install tmux
 #relevant tmux commands
 ```
 tmux ls
-```
-```
 tmux new -s sessionname
-```
-```
 tmux attach-session -t sessionname
 ```
 #Detach from session
