@@ -43,7 +43,31 @@ wget https://dl.influxdata.com/influxdb/releases/influxdb2-2.0.3-linux-arm64.deb
 ```
 
 #setup influxdb and grafana
-https://www.circuits.dk/temperature-logger-running-on-raspberry-pi/
+[this](https://www.circuits.dk/temperature-logger-running-on-raspberry-pi/)
 
 connect to VEBWaschgeraetewerk1
 pw: schwarz3nb3rg
+
+#install tmux
+```
+sudo apt-get install tmux 
+```
+# relevant tmux commands
+```
+tmux ls
+```
+```
+tmux new -s "sessionname"
+```
+# Detach from session
+```
+Ctrl + b d
+```
+```
+tmux attach-session -t sessionname
+```
+
+# more tmux commands
+[this](https://comtronic.com.au/blog/wp-content/uploads/comtronic_cheatsheet_tmux_A4.pdf)
+
+
