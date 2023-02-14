@@ -13,10 +13,8 @@ class xrest:
 
     def __init__(self, order):
         self.number = order
-        self.time = int(
-            input("Wieviele Minuten fuer Rast Nr. "+str(self.number)+"? ")) * 60
-        self.temperature = float(
-            input("Rast Nr. "+str(self.number)+" auf welcher Temperatur? "))
+        self.time = float(input("Wieviele Minuten fuer Rast Nr. "+str(self.number)+"? ")) * 60
+        self.temperature = float(input("Rast Nr. "+str(self.number)+" auf welcher Temperatur? "))
         self.noticed = False
 
 
