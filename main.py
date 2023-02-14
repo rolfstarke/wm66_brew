@@ -2,7 +2,6 @@ import keyboard
 import subprocess
 import datetime
 import RPi.GPIO as GPIO
-from pytz import timezone
 import argparse
 from configparser import ConfigParser
 from utils import current_temp
@@ -14,6 +13,7 @@ from brew_package.agitate import agitate
 from brew_package.cool import cool
 from brew_package.wort import wort
 from brew_package.mash import mash
+import brew_package.bot_listen
 
 # read all the settings from external config file
 config = ConfigParser()
@@ -56,11 +56,10 @@ args = parser.parse_args()
 try:
     if args.telegram:
         sendMsg("Ich hoere zu.")
-        subprocess.call("bot_listen.py", Shell=False)
+        brew_package.bot_listen
 
     elif args.heat:
-        heat(heater_pin,
-             relay_interval)
+        heat(heater_pin, relay_interval)
 
     elif args.agitate:
         agitate(agitator_pin)

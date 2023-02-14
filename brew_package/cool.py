@@ -6,7 +6,7 @@ from utils import current_temp
 from utils import writeInflux
 
 def cool(relay_interval, measurement_name): 
-    cooling_temp = float(input("deploy wort cooler and input target temperature."))
+    cooling_temp = float(input("deploy wort cooler and input target temperature "))
     sendMsg("Jetzt wird abgekuehlt!")
     while current_temp() < cooling_temp:
         time.sleep(relay_interval)
