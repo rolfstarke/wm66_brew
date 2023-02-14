@@ -37,10 +37,8 @@ def mash(agitator_pin, heater_pin, relay_interval, measurement_name):
         sendMsg("Rasttemperatur Nr." + str(i+1) + " erreicht.")
         endtime = time.time() + mash_rests[i].time
         while time.time() < endtime:
-            heater_control(mash_rests[i].temperature,
-                           heater_pin, relay_interval)
-            writeInflux(current_temp(),
-                        mash_rests[i].temperature, measurement_name)
+            heater_control(mash_rests[i].temperature, heater_pin, relay_interval)
+            writeInflux(current_temp(), mash_rests[i].temperature, measurement_name)
             if endtime-time.time() <= 120 and mash_rests[i].noticed == False:
                 sendMsg("Rast Nr." + str(i+1) +
                         " in 2 Min. fertig.")
