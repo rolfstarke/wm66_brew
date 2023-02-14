@@ -1,6 +1,7 @@
 from w1thermsensor import W1ThermSensor
 from influxdb import client as influxdb
 import RPi.GPIO as GPIO
+from pytz import timezone
 import datetime
 import time
 import requests
