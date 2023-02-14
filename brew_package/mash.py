@@ -27,7 +27,7 @@ def mash(agitator_pin, heater_pin, relay_interval, measurement_name):
     sendMsg("Es wird eingemaischt!")
     GPIO.output(agitator_pin, GPIO.HIGH)  # Ruehrwerk starten
     print(mash_rests)
-    for i in len(mash_rests):
+    for i in mash_rests:
         while current_temp() < mash_rests[i].temperature:
             heater_control(mash_rests[i].temperature,
                            heater_pin, relay_interval)
