@@ -10,9 +10,14 @@ import requests
 
 
 def current_temp():
+    while True:
+        try:
+            temperature = W1ThermSensor().get_temperature()
+            return temperature
+        except:
+            continue
+        break
 
-    temperature = W1ThermSensor().get_temperature()
-    return temperature
 
 # influxdb schreiben
 
