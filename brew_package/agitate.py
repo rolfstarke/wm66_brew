@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 import time
 
 def agitate(agitator_pin):
-    agitation_time = float(input("minutes to agitate for? ") * 60)
+    agitation_time = float(input("minutes to agitate for? "))
     print(agitation_time)
     GPIO.output(agitator_pin, GPIO.HIGH)
     time.sleep(agitation_time)
