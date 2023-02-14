@@ -24,7 +24,7 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 	wort_time = int(input("Wieviele Minuten soll die Wuerze gekocht werden? ")) * 60
 	tmp = int(input("Wieviele Hopfengaben? "))
 	GPIO.output(agitator_pin, GPIO.HIGH)  # Ruehrwerk starten
-	for i in tmp:
+	for i in range(tmp):
 		hoppings.append(xhopping(i+1))
 		while current_temp() < 95:
 			heater_control(98, heater_pin, relay_interval)
