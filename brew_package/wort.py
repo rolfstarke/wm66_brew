@@ -37,7 +37,7 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 			heater_control(98, heater_pin, relay_interval)
 			writeInflux(current_temp(), 98, measurement_name)
 			localtime = time.time()
-			for i in range(hoppings):
+			for i in range(len(hoppings)):
 				if 1 <= endtime-localtime-hoppings[i].time <= 120 and hoppings[i].noticed == False:
 					sendMsg("Hopfengabe" + hoppings[i].number + " in 2 Minuten")
 					hoppings[i].noticed = True
