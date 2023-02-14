@@ -13,8 +13,7 @@ class xhopping:
 
     def __init__(self, order):
         self.number = order
-        self.time = int(
-            input("Hopfengabe " + str(self.number)+" bei wieviel Minuten? ")) * 60
+        self.time = int(input("Hopfengabe " + str(self.number)+" bei wieviel Minuten? ")) * 60
         self.noticed = False
         self.instructed = False
 
@@ -23,6 +22,7 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 	hoppings = []
 	wort_time = int(input("Wieviele Minuten soll die Wuerze gekocht werden? ")) * 60
 	tmp = int(input("Wieviele Hopfengaben? "))
+	sendMsg("Dann heize ich mal eure Würze. Lol!")
 	#GPIO.output(agitator_pin, GPIO.HIGH)  # Ruehrwerk starten
 	for i in range(tmp):
 		hoppings.append(xhopping(i+1))
@@ -42,7 +42,7 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 					sendMsg("Hopfengabe" + str(hoppings[i].number) + " in 2 Minuten")
 					hoppings[i].noticed = True
 					if endtime-localtime-hoppings[i].time <= 0 and hoppings[i].instructed == False:
-						sendMsg("Hopfengabe! Hopfengabe Nr" + str(hoppings[i].number) + "! ZackZackZack")
+						sendMsg("Hooooopfengaaaaaabe! Hopfengabe Nr" + str(hoppings[i].number) + "! ZackZackZack")
 					hoppings[i].instructed = True
 	print("wort completed")
 	sendMsg("Wuerzekochen abgeschlossen")
