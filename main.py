@@ -13,7 +13,7 @@ from brew_package.agitate import agitate
 from brew_package.cool import cool
 from brew_package.wort import wort
 from brew_package.mash import mash
-import brew_package.bot_listen
+# import brew_package.bot_listen
 
 # read all the settings from external config file
 config = ConfigParser()
