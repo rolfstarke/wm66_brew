@@ -37,21 +37,15 @@ GPIO.output(agitator_pin, GPIO.LOW)
 # create an ArgumentParser object and a mutually exclusive group. add command line arguments and parse the arguments
 parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group()
-group.add_argument(
-    "-c", "--cool", help="Abkuehlen - Heizung und Ruehrwerk sind aus, es wird nur die Temperatur geloggt", action='store_true')
-group.add_argument("-w", "-wort", "--wort",
-                   help="Wuerzekochen", action='store_true')
-group.add_argument("-m", "-mash", "--mash",
-                   help="Maischen", action='store_true')
+group.add_argument("-c", "--cool", help="Abkuehlen - Heizung und Ruehrwerk sind aus, es wird nur die Temperatur geloggt", action='store_true')
+group.add_argument("-w", "-wort", "--wort", help="Wuerzekochen", action='store_true')
+group.add_argument("-m", "-mash", "--mash", help="Maischen", action='store_true')
 group.add_argument("--heat", help="Heizen", action='store_true')
 group.add_argument("--agitate", help="Ruehren", action='store_true')
-parser.add_argument("-t", "--telegram",
-                    help='Telegrambot starten', action='store_true')
+parser.add_argument("-t", "--telegram", help='Telegrambot starten', action='store_true')
 args = parser.parse_args()
 
-
 # die Klasse Hopfengaben
-
 
 try:
     if args.telegram:
