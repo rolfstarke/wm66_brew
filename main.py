@@ -77,11 +77,11 @@ try:
         mash(agitator_pin, heater_pin, relay_interval, beer_name)
 
 except KeyboardInterrupt:
-    GPIO.output(heater_pin, GPIO.LOW)
-    GPIO.output(agitator_pin, GPIO.LOW)
     print("Hau ab!")
     sendMsg("Brauvorgang abgebrochen, ihr Halunken!")
-    pass
-
-GPIO.output(heater_pin, GPIO.LOW)
-GPIO.output(agitator_pin, GPIO.LOW)
+    
+except Exception as e:
+    print(e)
+    
+finally:
+    GPIO.cleanup()
