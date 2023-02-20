@@ -15,7 +15,7 @@ from brew_package.wort import wort
 from brew_package.mash import mash
 # import brew_package.bot_listen
 
-with open('meta/ascii_humpen.txt', 'r') as file:
+with open('meta/ascii-humpen.txt', 'r') as file:
     for line in file:
         print(line.strip())
         time.sleep(0.5)
