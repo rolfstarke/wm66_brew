@@ -15,6 +15,11 @@ from brew_package.wort import wort
 from brew_package.mash import mash
 # import brew_package.bot_listen
 
+with open('meta/ascii_humpen.txt', 'r') as file:
+    for line in file:
+        print(line.strip())
+        time.sleep(0.5)
+
 # read all the settings from external config file
 config = ConfigParser()
 config.read('config.ini')
