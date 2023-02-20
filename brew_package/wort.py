@@ -25,7 +25,7 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 		hoppings.append(xhopping(i+1))
 	
 	sendMsg("Dann heize ich mal eure Würze. Lol!")
-	#GPIO.output(agitator_pin, GPIO.HIGH)  # Ruehrwerk starten
+	GPIO.output(agitator_pin, GPIO.HIGH)  # Ruehrwerk starten
 	for i in range(len(hoppings)):
 		while current_temp() < 95:
 			heater_control(98, heater_pin, relay_interval)
