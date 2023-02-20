@@ -18,8 +18,8 @@ from brew_package.mash import mash
 
 with open('meta/ascii-humpen.txt', 'r') as file:
     for line in file:
-        print(line.strip())
-        time.sleep(0.5)
+        print(line)
+        time.sleep(0.2)
 
 # read all the settings from external config file
 config = ConfigParser()
