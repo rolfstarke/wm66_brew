@@ -1,4 +1,5 @@
 import keyboard
+import time
 import subprocess
 import datetime
 import RPi.GPIO as GPIO
