@@ -39,7 +39,7 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 		localtime = time.time()
 		for i in range(len(hoppings)):
 			if 20 <= endtime-localtime-hoppings[i].time <= 120 and hoppings[i].noticed == False:
-				sendMsg("Hopfengabe Nr. " + str(hoppings[i].number) + " vorbereiten")
+				sendMsg("Hopfengabe Nr. " + str(hoppings[i].number) + " in " + round((endtime-localtime-hoppings[i].time), 0) + " Sekunden") 
 				hoppings[i].noticed = True
 			if endtime-localtime-hoppings[i].time <= 0 and hoppings[i].instructed == False:
 				sendMsg("Hooooopfengaaaaaabe! Hopfengabe Nr. " + str(hoppings[i].number) + "! ZackZackZack")
