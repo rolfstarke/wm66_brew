@@ -25,10 +25,15 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 		hoppings.append(xhopping(i+1))
 	
 	sendMsg("Dann heize ich mal eure Würze. Lol!")
+	heatingFinished = False
 	GPIO.output(agitator_pin, GPIO.HIGH)  # Ruehrwerk starten
 	while current_temp() < 95:
 		heater_control(98, heater_pin, relay_interval)
 		writeInflux(current_temp(), 98, measurement_name)
+		if heatingFinished==False and current_temp() >= 94:
+			print("Würze ein Grad unter Zieltemperatur, ihr Dullis")
+			sendMsg("Würze ein Grad unter Zieltemperatur, ihr Dullis")
+			heatingFinished = True
 	print("starting wort")
 	sendMsg("Wuerzekochen!")
 	localtime = time.time()
@@ -39,12 +44,11 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 		localtime = time.time()
 		for i in range(len(hoppings)):
 			if 20 <= endtime-localtime-hoppings[i].time <= 120 and hoppings[i].noticed == False:
-				sendMsg("Hopfengabe Nr. " + str(hoppings[i].number) + " in " + str(round((endtime-localtime-hoppings[i].time), 0)) + " Sekunden") 
+				sendMsg("Hopfengabe Nr. " + str(hoppings[i].number) + " in " + str(int(round((endtime-localtime-hoppings[i].time), 0))) + " Sekunden") 
 				hoppings[i].noticed = True
 			if endtime-localtime-hoppings[i].time <= 0 and hoppings[i].instructed == False:
 				sendMsg("Hooooopfengaaaaaabe! Hopfengabe Nr. " + str(hoppings[i].number) + "! ZackZackZack")
 				hoppings[i].instructed = True
-				print(str(endtime-localtime-hoppings[i].time))
 	print("wort completed")
 	sendMsg("Wuerzekochen abgeschlossen")
 	GPIO.output(heater_pin, GPIO.LOW)
