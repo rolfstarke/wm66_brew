@@ -19,7 +19,7 @@ from brew_package.mash import mash
 with open('meta/ascii-humpen.txt', 'r') as file:
     for line in file:
         print(line)
-        time.sleep(0.1)
+        time.sleep(0.07)
 
 # read all the settings from external config file
 config = ConfigParser()
