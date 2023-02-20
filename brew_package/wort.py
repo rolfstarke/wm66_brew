@@ -42,8 +42,8 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 				if 1 <= endtime-localtime-hoppings[i].time <= 120 and hoppings[i].noticed == False:
 					sendMsg("Hopfengabe" + str(hoppings[i].number) + " in 2 Minuten")
 					hoppings[i].noticed = True
-					if endtime-localtime-hoppings[i].time <= 0 and hoppings[i].instructed == False:
-						sendMsg("Hooooopfengaaaaaabe! Hopfengabe Nr" + str(hoppings[i].number) + "! ZackZackZack")
+				if endtime-localtime-hoppings[i].time <= 0 and hoppings[i].instructed == False:
+					sendMsg("Hooooopfengaaaaaabe! Hopfengabe Nr" + str(hoppings[i].number) + "! ZackZackZack")
 					hoppings[i].instructed = True
 	print("wort completed")
 	sendMsg("Wuerzekochen abgeschlossen")
