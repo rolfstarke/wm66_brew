@@ -74,13 +74,13 @@ try:
                     for step in step_sequence:
                         set_step(step)
                         time.sleep(step_delay)
-                print(f'Uhrzeigersinn: {steps} Schritte ausgeführt. Letzter Wert {rounded_value}')
+                print(f'CCW: {steps} Schritte ausgeführt. Letzter Wert {rounded_value}')
             elif diff > 0:
                 for i in range(steps):
                     for step in reversed(step_sequence):
                         set_step(step)
                         time.sleep(step_delay)
-                print(f'Gegen den Uhrzeigersinn: {steps} Schritte ausgeführt. Letzter Wert {rounded_value}')
+                print(f'CW: {steps} Schritte ausgeführt. Letzter Wert {rounded_value}')
             else:
                 print(f'Keine Änderung des Wertes. Letzter Wert {rounded_value}')
 
