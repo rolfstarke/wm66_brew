@@ -9,7 +9,7 @@ def handle(msg):
         chat_id = msg['chat']['id']
         command = msg['text']
 
-        print('Got command: %s' % command)
+        #print('Got command: %s' % command)
 
         if command == '/temperatur':
                 temperature = W1ThermSensor().get_temperature()
@@ -27,7 +27,7 @@ with open("data/token.txt") as file:
 bot = telepot.Bot(token[0])
 
 MessageLoop(bot, handle).run_as_thread()
-print('I am listening ...')
+#print('I am listening ...')
 
 while 1:
     time.sleep(10)
