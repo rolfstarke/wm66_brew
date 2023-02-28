@@ -8,11 +8,14 @@ coil_A_2_pin = 22
 coil_B_1_pin = 4
 coil_B_2_pin = 27
 
-# Schritte pro Umdrehung des 28BYJ-48 Motors
-steps_per_revolution = 512
-
 # Verzögerung zwischen den Schritten in Sekunden
 step_delay = 0.01
+
+# Steps pro Grad Celsius
+steps_celsius = 40
+
+# Startwert für last_output_value
+last_output_value = 20
 
 # Verbindung zur InfluxDB herstellen
 client = InfluxDBClient(host='192.168.188.36', port=8086, username='grafana', password='12TUDdd.47', database='dhtTest')
@@ -44,8 +47,6 @@ def set_step(step):
     GPIO.output(coil_B_1_pin, step[2])
     GPIO.output(coil_B_2_pin, step[3])
 
-last_output_value = 20
-
 try:
     while True:
         # InfluxQL-Abfrage für den letzten Wert der Datenreihe
@@ -65,8 +66,8 @@ try:
             # Differenz zwischen den beiden Werten berechnen
             diff = rounded_value - last_output_value
 
-            # Anzahl der Schritte berechnen (20 Schritte pro Einheit Differenz)
-            steps = int(abs(diff) * 40)
+            # Anzahl der Schritte berechnen
+            steps = int(abs(diff) * steps_celsius)
 
             # Schritte in der entsprechenden Richtung ausführen
             if diff < 0:
@@ -95,6 +96,9 @@ try:
 
 except KeyboardInterrupt:
     print('Abbruch durch Nutzer')
+
+except e:
+    print(e)
 
 finally:
     GPIO.cleanup()
