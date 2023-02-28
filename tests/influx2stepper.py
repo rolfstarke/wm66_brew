@@ -97,7 +97,7 @@ try:
 except KeyboardInterrupt:
     print('Abbruch durch Nutzer')
 
-except e:
+except Exception as e:
     print(e)
 
 finally:
