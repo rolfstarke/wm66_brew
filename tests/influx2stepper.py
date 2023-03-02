@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import datetime
 from influxdb import InfluxDBClient
 
 # Pins des ULN2003A-Treibers am Raspberry Pi
@@ -9,7 +10,7 @@ coil_B_1_pin = 4
 coil_B_2_pin = 27
 
 # Verzögerung zwischen den Schritten in Sekunden
-step_delay = 0.01
+step_delay = 0.07
 
 # Steps pro Grad Celsius
 steps_celsius = 40
@@ -69,21 +70,24 @@ try:
             # Anzahl der Schritte berechnen
             steps = int(abs(diff) * steps_celsius)
 
+            # Zeitstempel festlegen
+            dt = "{:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now())
+
             # Schritte in der entsprechenden Richtung ausführen
             if diff < 0:
                 for i in range(steps):
                     for step in step_sequence:
                         set_step(step)
                         time.sleep(step_delay)
-                print(f'CCW: {steps} Schritte ausgeführt. Letzter Wert {rounded_value}')
+                print(f'{dt} | CCW: {steps} Schritte ausgeführt. Letzter Wert {rounded_value}')
             elif diff > 0:
                 for i in range(steps):
                     for step in reversed(step_sequence):
                         set_step(step)
                         time.sleep(step_delay)
-                print(f'CW: {steps} Schritte ausgeführt. Letzter Wert {rounded_value}')
+                print(f'{dt} | CW: {steps} Schritte ausgeführt. Letzter Wert {rounded_value}')
             else:
-                print(f'Keine Änderung des Wertes. Letzter Wert {rounded_value}')
+                print(f'{dt} | Keine Änderung des Wertes. Letzter Wert {rounded_value}')
 
             # Letzten Ausgabewert aktualisieren
             last_output_value = rounded_value
