@@ -6,11 +6,11 @@ from influxdb import InfluxDBClient
 # Pins des ULN2003A-Treibers am Raspberry Pi
 coil_A_1_pin = 17
 coil_A_2_pin = 22
-coil_B_1_pin = 4
+coil_B_1_pin = 23
 coil_B_2_pin = 27
 
 # Verzögerung zwischen den Schritten in Sekunden
-step_delay = 0.07
+step_delay = 0.05
 
 # Steps pro Grad Celsius
 steps_celsius = 40
