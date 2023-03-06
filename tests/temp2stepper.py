@@ -52,7 +52,8 @@ def get_temp():
 	try:
 		temp = W1ThermSensor().get_temperature()
 		return temp
-
+	
+	# Ab und zu wird diese exception geworfen. Kein Plan warum...
 	except w1thermsensor.errors.SensorNotReadyError:
 		temp = None
 
