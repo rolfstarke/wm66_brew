@@ -40,7 +40,7 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 	endtime = time.time() + wort_time
 	while localtime < endtime:
 		heater_control(98, heater_pin, relay_interval)
-		writeInflux(current_temp(), 98, measurement_name)
+		writeInflux(current_temp(), float(98), measurement_name)
 		localtime = time.time()
 		for i in range(len(hoppings)):
 			if 20 <= endtime-localtime-hoppings[i].time <= 120 and hoppings[i].noticed == False:
