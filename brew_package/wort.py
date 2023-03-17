@@ -29,7 +29,7 @@ def wort(agitator_pin, heater_pin, relay_interval, measurement_name):
 	GPIO.output(agitator_pin, GPIO.HIGH)  # Ruehrwerk starten
 	while current_temp() < 95:
 		heater_control(98, heater_pin, relay_interval)
-		writeInflux(current_temp(), 98, measurement_name)
+		writeInflux(current_temp(), float(98), measurement_name)
 		if heatingFinished==False and current_temp() >= 94:
 			print("Würze ein Grad unter Zieltemperatur, ihr Dullis")
 			sendMsg("Würze ein Grad unter Zieltemperatur, ihr Dullis")
