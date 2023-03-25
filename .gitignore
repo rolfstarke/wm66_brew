@@ -1,0 +1,8 @@
+__pycache__/
+archive/
+# Environments, just in case we ever use them
+.env
+.venv
+env/
+venv/
+ENV/
