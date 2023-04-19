@@ -5,6 +5,6 @@ import time
 def shake(agitator_pin):
    
     GPIO.output(agitator_pin, GPIO.HIGH)
-    time.sleep(0.5)
+    time.sleep(1)
     GPIO.output(agitator_pin, GPIO.LOW)
     print("agitation finished")
