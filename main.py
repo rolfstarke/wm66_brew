@@ -66,6 +66,9 @@ try:
 
     elif args.agitate:
         agitate(agitator_pin)
+        
+    elif args.shake:
+        shake(agitator_pin)
 
     beer_name = input("Ey Fucker, wie heißt das Gesoeff? ") + \
         " " + str(datetime.date.today())
