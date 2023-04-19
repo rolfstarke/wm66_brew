@@ -3,5 +3,5 @@ import sys
 sys.path.append('/root/wm66_brew/tests')
 import bot_sending_test
 
-message = "Die WM66 braucht dich! Genug geschraubt an sozialistischen Schwestern Katzenhäusern!!! Auf auf!"
+message = input("Was denkt die WM66 gerade?")
 bot_sending_test.sendMsg(message)
