@@ -14,6 +14,8 @@ from brew_package.agitate import agitate
 from brew_package.cool import cool
 from brew_package.wort import wort
 from brew_package.mash import mash
+from brew_package.shake import shake
+
 # import brew_package.bot_listen
 
 with open('meta/ascii-humpen.txt', 'r') as file:
@@ -48,6 +50,7 @@ group.add_argument("-w", "-wort", "--wort", help="Wuerzekochen", action='store_t
 group.add_argument("-m", "-mash", "--mash", help="Maischen", action='store_true')
 group.add_argument("--heat", help="Heizen", action='store_true')
 group.add_argument("--agitate", help="Ruehren", action='store_true')
+group.add_argument("--shake", help="Ruetteln", action='store_true')
 parser.add_argument("-t", "--telegram", help='Telegrambot starten', action='store_true')
 args = parser.parse_args()
 
