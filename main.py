@@ -65,15 +65,15 @@ try:
 
     elif args.heat:
         heat(heater_pin, relay_interval)
-        return
+        break
 
     elif args.agitate:
         agitate(agitator_pin)
-        return
+        break
         
     elif args.shake:
         shake(agitator_pin)
-        return
+        break
 
     beer_name = input("Ey Fucker, wie heißt das Gesoeff? ") + \
         " " + str(datetime.date.today())
