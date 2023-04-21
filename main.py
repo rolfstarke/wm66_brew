@@ -76,7 +76,7 @@ try:
         shake(agitator_pin)
         nameBool = False
 
-    if nameBool == True
+    if nameBool == True:
         beer_name = input("Ey Fucker, wie heißt das Gesoeff? ") + \
             " " + str(datetime.date.today())
 
