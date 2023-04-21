@@ -2,8 +2,8 @@ import RPi.GPIO as GPIO
 import time
 
 # Konstanten für die Dauer der Agitation und die Verzögerung zwischen den Schüttelbewegungen
-AGITATOR_DURATION = 0.1
-DELAY_BETWEEN_SHAKES = 1
+AGITATOR_DURATION = 0.06
+DELAY_BETWEEN_SHAKES = 0.1
 
 def shake(agitator_pin):
     try:
