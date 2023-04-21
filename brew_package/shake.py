@@ -1,11 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-# Konstanten für die Dauer der Agitation und die Verzögerung zwischen den Schüttelbewegungen
-AGITATOR_DURATION = 0.06
-DELAY_BETWEEN_SHAKES = 0.3
-
-def shake(agitator_pin):
+def shake(agitator_pin, agitator_duration = 0.06, delay_between_shakes = 0.3):
     try:
         # GPIO-Modus auf BOARD setzen und den angegebenen Pin als Ausgang konfigurieren
         GPIO.setmode(GPIO.BOARD)
@@ -24,10 +20,10 @@ def shake(agitator_pin):
         counter = 0
         while counter < shakes:
             GPIO.output(agitator_pin, GPIO.HIGH)
-            time.sleep(AGITATOR_DURATION)
+            time.sleep(agitator_duration)
             GPIO.output(agitator_pin, GPIO.LOW)
             counter += 1
-            time.sleep(DELAY_BETWEEN_SHAKES)
+            time.sleep(delay_between_shakes)
             
         print("Agitation beendet ;-)")
     
