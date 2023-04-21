@@ -57,6 +57,7 @@ parser.add_argument("-t", "--telegram", help='Telegrambot starten', action='stor
 args = parser.parse_args()
 
 # die Klasse Hopfengaben
+nameBool = True
 
 try:
     if args.telegram:
@@ -65,18 +66,19 @@ try:
 
     elif args.heat:
         heat(heater_pin, relay_interval)
-        break
+        nameBool = False
 
     elif args.agitate:
         agitate(agitator_pin)
-        break
+        nameBool = False
         
     elif args.shake:
         shake(agitator_pin)
-        break
+        nameBool = False
 
-    beer_name = input("Ey Fucker, wie heißt das Gesoeff? ") + \
-        " " + str(datetime.date.today())
+    if nameBool == True
+        beer_name = input("Ey Fucker, wie heißt das Gesoeff? ") + \
+            " " + str(datetime.date.today())
 
     if args.cool:
         cool(relay_interval, beer_name)
