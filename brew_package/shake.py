@@ -3,7 +3,7 @@ import time
 
 # Konstanten für die Dauer der Agitation und die Verzögerung zwischen den Schüttelbewegungen
 AGITATOR_DURATION = 0.06
-DELAY_BETWEEN_SHAKES = 0.1
+DELAY_BETWEEN_SHAKES = 0.3
 
 def shake(agitator_pin):
     try:
