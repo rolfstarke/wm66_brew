@@ -18,7 +18,7 @@ def shake(agitator_pin):
                 shakes = int(shakes_input)
                 break
             except ValueError:
-                print("Ungültige Eingabe. Bitte geben Sie eine ganze Zahl ein.")
+                print("Depp. Gib eine ganze Zahl ein!")
         
         # Schleife für die angegebene Anzahl an Schüttelbewegungen durchlaufen
         counter = 0
